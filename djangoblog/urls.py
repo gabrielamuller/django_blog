@@ -17,9 +17,13 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from accounts.views import get_index
 from accounts import urls as accounts_urls
+from blog import urls as blog_urls
+from blog.views import post_list
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', get_index),
-    url(r'^accounts/', include(accounts_urls))
+    #url(r'^$', get_index, name="index"),
+    url(r'^accounts/', include(accounts_urls)),
+    url(r'^blog/', include(blog_urls)),
+    url(r'^$', post_list, name='index'),
 ]
