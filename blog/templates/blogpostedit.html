@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+    {% load bootstrap_tags %}
+    <h1>Edit post</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form | as_bootstrap }}
+        <button type="submit" class="btn btn-info" formaction="{% url 'edit_post' post.id %}">Save</button>
+        <button type="submit" class="btn btn-warning" formaction="{% url 'delete_post' post.id %}">Delete</button>
+    </form>
+{% endblock %}

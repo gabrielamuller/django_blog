@@ -11,7 +11,7 @@ def get_index(request):
 def logout(request):
     auth.logout(request)
     messages.success(request, 'You have successfully logged out')
-    return redirect(get_index)
+    return redirect('index')
     
 def login(request):
     if request.method =="POST":
@@ -48,7 +48,7 @@ def register(request):
                                     password=form.cleaned_data['password1'])
             if user is not None:
                 auth.login(request, user)
-                return redirect(get_index)
+                return redirect('index')
     else:
         form = UserRegistrationForm()
     return render(request, "register.html", {'form': form})

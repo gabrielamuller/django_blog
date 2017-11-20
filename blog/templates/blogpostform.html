@@ -1,12 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
- <h1>Add a blog post</h1>
-    
-    <form method="POST">
+    {% load bootstrap_tags %}
+    <h1>New post</h1>
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form }}
-        <button type="submit">Save</button>
+        {{ form | as_bootstrap }}
+        <button type="submit" class="btn btn-info">Save</button>
     </form>
-
-   {% endfor %}
 {% endblock %}
