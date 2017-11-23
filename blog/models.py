@@ -3,12 +3,7 @@ from django.utils import timezone
 
 
 class Post(models.Model):
-    """
-    Here we'll define our Post model
-    """
-
-    # author is linked to a registered
-    # user in the 'auth_user' table.
+    slug = models.SlugField(max_length=50)
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
     content = models.TextField()
@@ -22,5 +17,16 @@ class Post(models.Model):
         self.published_date = timezone.now()
         self.save()
 
+    def __str__(self):
+        return self.title
+
+class Comment(models.Model):
+    author = models.ForeignKey('auth.User')
+    post = models.ForeignKey(Post, related_name='comments')
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+    approved = models.BooleanField(blank=False, default=False)
+    
     def __str__(self):
         return self.title
